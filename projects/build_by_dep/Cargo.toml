@@ -15,6 +15,11 @@ exclude = ["package.json", "tests/**"]
 
 [dev-dependencies]
 
+[build-dependencies.yggdrasil-shared]
+version = "0.2.3"
+git = "https://github.com/ygg-lang/yggdrasil-rs"
+branch = "dev"
+
 [features]
 default = []
 

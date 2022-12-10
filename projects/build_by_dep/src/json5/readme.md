@@ -1,3 +1,3 @@
 # Json5Language
 
-![Railway](../railway.svg)
+![Railway](./railway.svg)

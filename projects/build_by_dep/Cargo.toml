@@ -12,13 +12,15 @@ edition = "2021"
 exclude = ["package.json", "tests/**"]
 
 [dependencies]
+yggdrasil-rt = "0.0.5"
 
 [dev-dependencies]
 
 [build-dependencies.yggdrasil-shared]
 version = "0.2.3"
-git = "https://github.com/ygg-lang/yggdrasil-rs"
-branch = "dev"
+path = 'C:\Users\Dell\CLionProjects\yggdrasil-rs\projects\ygg-core'
+#git = "https://github.com/ygg-lang/yggdrasil-rs"
+#branch = "dev"
 
 [features]
 default = []

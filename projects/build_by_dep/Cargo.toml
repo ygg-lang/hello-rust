@@ -18,9 +18,9 @@ yggdrasil-rt = "0.0.5"
 
 [build-dependencies.yggdrasil-shared]
 version = "0.2.3"
-path = 'C:\Users\Dell\CLionProjects\yggdrasil-rs\projects\ygg-core'
-#git = "https://github.com/ygg-lang/yggdrasil-rs"
-#branch = "dev"
+#path = 'C:\Users\Dell\CLionProjects\yggdrasil-rs\projects\ygg-core'
+git = "https://github.com/ygg-lang/yggdrasil-rs"
+branch = "dev"
 
 [features]
 default = []

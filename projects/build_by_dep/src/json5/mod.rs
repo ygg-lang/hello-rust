@@ -11,6 +11,7 @@ mod parse_ast;
 type Input<'i> = Box<State<'i, Json5Rule>>;
 type Output<'i> = Result<Box<State<'i, Json5Rule>>, Box<State<'i, Json5Rule>>>;
 
+#[doc = include_str!("railway.min.svg")]
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Ord, PartialOrd, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]

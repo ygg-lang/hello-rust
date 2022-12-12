@@ -1,31 +1,42 @@
-Rust Template Project
-=====================
+Yggdrasil Template
+==================
 
-Rust template project for monorepo
+## Build with CLI(Recommend)
 
-## Change the initial commit
+1. Install `ycc`
 
 ```shell
-git commit --amend --message "🎂 Project initialized!" --date "2012-12-12"
+cargo install ycc --force
 ```
 
-## Emoji Comment
+2. Written grammar definition file,
+- e.g.: [json5.ygg](projects/build_by_dep/grammars/json5.ygg)
 
-| Emoji  | Meaning                      |  
-|--------|------------------------------|  
-| 🎂     | Project initialized!         |  
-| 🎉     | Release new version          |  
-| 🧪🔮   | Experimental code            |   
-| 🔧🐛🐞 | Bug fix                      |  
-| 🔒     | Security fix                 |  
-| 🐣🐤🐥 | Add feature                  |  
-| 📝🎀   | Documentation                |  
-| 🚀     | Performance improve!         |  
-| 🚧     | Work in progress             |  
-| 🚨     | Test coverage improve!       |  
-| 🚥     | CI improve!                  |  
-| 🔥🧨   | Remove code or files         |
-| 🧹     | Code refactor                |
-| 📈     | Add analytics or branch code |
-| 🤖     | Automation fix               |
-| 📦     | Update dependencies          |
+3. Run build command
+
+```
+ycc build
+```
+
+
+## Build with RUST dependence 
+
+1. Written grammar definition file, 
+  - e.g.: [json5.ygg](projects/build_by_dep/grammars/json5.ygg)
+
+2. Define build dependencies in cargo
+
+- Require rust nightly
+
+```toml
+[build-dependencies.yggdrasil-shared]
+version = "0.2.3"
+```
+
+3. Write the `build.rs`
+
+- See: [build.rs](projects/build_by_dep/build.rs)
+
+4. Run `cargo build` and reexport needed symbols
+
+- See: [lib.rs](projects/build_by_dep/src/lib.rs)

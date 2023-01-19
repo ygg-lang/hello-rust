@@ -1,15 +1,10 @@
-name: Deploy static content to Pages
+name: Deploy documentations
 
 on:
   push:
     branches: [ master, dev ]
-  pull_request:
-    branches: [ master, dev ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -20,16 +15,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
-      - run: git config --global core.autocrlf false
       - uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
       - name: Rust Nightly
         uses: actions-rs/toolchain@v1
         with:
@@ -39,11 +28,30 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: doc
-          args: --package build_by_script --no-deps --open
+          args: --package build_by_script --no-deps
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Fix permissions
+        run: |
+          chmod -c -R +rX "target/doc/" | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           path: 'target/doc/'
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2

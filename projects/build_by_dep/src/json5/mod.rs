@@ -1,12 +1,11 @@
 #![allow(dead_code, unused_imports, non_camel_case_types)]
 #![doc = include_str!("readme.md")]
 
-use std::sync::OnceLock;
-
-use yggdrasil_rt::*;
-
 mod parse_cst;
 mod parse_ast;
+
+use yggdrasil_rt::*;
+use std::sync::OnceLock;
 
 type Input<'i> = Box<State<'i, Json5Rule>>;
 type Output<'i> = Result<Box<State<'i, Json5Rule>>, Box<State<'i, Json5Rule>>>;

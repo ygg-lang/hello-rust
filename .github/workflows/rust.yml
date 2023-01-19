@@ -25,3 +25,8 @@ jobs:
         run: cargo build --release
       - name: Tests
         run: cargo test --release
+      - name: Build Documentation
+        uses: actions-rs/cargo@v1
+        with:
+          command: doc
+          args: --package build_by_script --no-deps

@@ -2,7 +2,7 @@ name: Deploy documentations
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [ master ]
   workflow_dispatch:
 
 permissions:
@@ -26,9 +26,8 @@ jobs:
             override: true
       - name: Build Documentation
         uses: actions-rs/cargo@v1
-        with:
-          command: doc
-          args: --package build_by_script --no-deps
+        run: |
+            RUSTDOCFLAGS="--enable-index-page -Zunstable-options" cargo doc --no-deps
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Fix permissions

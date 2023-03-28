@@ -25,7 +25,6 @@ jobs:
             toolchain: nightly
             override: true
       - name: Build Documentation
-        uses: actions-rs/cargo@v1
         run: |
             RUSTDOCFLAGS="--enable-index-page -Zunstable-options" cargo doc --no-deps
       - name: Setup Pages

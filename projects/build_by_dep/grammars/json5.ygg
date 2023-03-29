@@ -24,7 +24,7 @@ class Array {
 
 atomic class String {
     | "'"  "'"
-    | "'" (StringEscaped | ANY) "'"
+    | "'" (escape:StringEscaped | ANY) "'"
 }
 
 atomic class StringEscaped {

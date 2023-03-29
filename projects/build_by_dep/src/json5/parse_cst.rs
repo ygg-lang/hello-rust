@@ -1,24 +1,21 @@
 use super::*;
 
-impl YggdrasilLanguage for Json5Language {
-    type Rule = Json5Rule;
-    fn parse_cst(input: &str, rule: Json5Rule) -> OutputResult<Json5Rule> {
-        state(input, |state| match rule {
-            Json5Rule::Value => parse_value(state),
-            Json5Rule::Object => parse_object(state),
-            Json5Rule::ObjectPair => parse_object_pair(state),
-            Json5Rule::Array => parse_array(state),
-            Json5Rule::String => parse_string(state),
-            Json5Rule::StringEscaped => parse_string_escaped(state),
-            Json5Rule::Number => parse_number(state),
-            Json5Rule::Boolean => parse_boolean(state),
-            Json5Rule::Null => parse_null(state),
-            Json5Rule::Identifier => parse_identifier(state),
-            Json5Rule::WhiteSpace => parse_white_space(state),
-            Json5Rule::IgnoreText => unreachable!(),
-            Json5Rule::IgnoreRegex => unreachable!(),
-        })
-    }
+pub(super) fn parse_cst(input: &str, rule: Json5Rule) -> OutputResult<Json5Rule> {
+    state(input, |state| match rule {
+        Json5Rule::Value => parse_value(state),
+        Json5Rule::Object => parse_object(state),
+        Json5Rule::ObjectPair => parse_object_pair(state),
+        Json5Rule::Array => parse_array(state),
+        Json5Rule::String => parse_string(state),
+        Json5Rule::StringEscaped => parse_string_escaped(state),
+        Json5Rule::Number => parse_number(state),
+        Json5Rule::Boolean => parse_boolean(state),
+        Json5Rule::Null => parse_null(state),
+        Json5Rule::Identifier => parse_identifier(state),
+        Json5Rule::WhiteSpace => parse_white_space(state),
+        Json5Rule::IgnoreText => unreachable!(),
+        Json5Rule::IgnoreRegex => unreachable!(),
+    })
 }
 #[inline]
 fn parse_value(state: Input) -> Output {

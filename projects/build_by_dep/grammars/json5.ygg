@@ -3,7 +3,7 @@ grammar Json5 {}
 entry union Value {
     | Object  #Object
     | Array   #Array
-    // | String  #String
+    | String  #String
     | Number  #Number
     | Boolean #Boolean
     | Null    #Null
@@ -19,16 +19,21 @@ union ObjectPair {
 }
 
 class Array {
-    '[' (Value (',' Value)* ',')? ']'
+    '[' (item:Value (',' Value)* ',')? ']'
 }
 
-atomic class String {
-    | "'"  "'"
-    | "'" (escape:StringEscaped | ANY) "'"
+atomic union String {
+    | "'" StringRaw "'"    #SingleQuote
+    | "'" StringText* "'"  #DoubleQuote
 }
 
-atomic class StringEscaped {
-'\' ANY
+class StringRaw -> StringText {
+/[^"]*/
+}
+
+union StringText {
+| '\' ANY #Escape
+    | /[^"]+/ #Character
 }
 
 atomic class Number {
@@ -49,6 +54,5 @@ class Identifier {
 }
 
 atomic ignore class WhiteSpace {
-    // UNICODE_WHITE_SPACE
-    ' ' | '\n' | '\r'
+    [\p{WhiteSpace}]
 }

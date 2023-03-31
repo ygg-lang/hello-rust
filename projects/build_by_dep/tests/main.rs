@@ -1,13 +1,10 @@
+use build_by_script::json5::{Json5Language, Json5Rule};
 use yggdrasil_rt::YggdrasilLanguage;
-
-use build_by_script::{Json5Language, Json5Rule};
 
 #[test]
 fn ready() {
     println!("it works!")
 }
-
-
 
 #[test]
 fn test_array() {

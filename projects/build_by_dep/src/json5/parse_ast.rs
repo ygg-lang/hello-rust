@@ -8,7 +8,9 @@ impl YggdrasilNode for ValueNode {
     }
 
     fn get_range(&self) -> Range<usize> {
-        self.span.clone()
+        match self {
+            _ => unreachable!(),
+        }
     }
 }
 impl YggdrasilNode for ObjectNode {
@@ -19,7 +21,7 @@ impl YggdrasilNode for ObjectNode {
     }
 
     fn get_range(&self) -> Range<usize> {
-        self.span.clone()
+        Range { start: self.span.start as usize, end: self.span.end as usize }
     }
 }
 impl YggdrasilNode for ObjectPairNode {
@@ -30,7 +32,9 @@ impl YggdrasilNode for ObjectPairNode {
     }
 
     fn get_range(&self) -> Range<usize> {
-        self.span.clone()
+        match self {
+            _ => unreachable!(),
+        }
     }
 }
 impl YggdrasilNode for ArrayNode {
@@ -41,7 +45,7 @@ impl YggdrasilNode for ArrayNode {
     }
 
     fn get_range(&self) -> Range<usize> {
-        self.span.clone()
+        Range { start: self.span.start as usize, end: self.span.end as usize }
     }
 }
 impl YggdrasilNode for StringNode {
@@ -52,10 +56,13 @@ impl YggdrasilNode for StringNode {
     }
 
     fn get_range(&self) -> Range<usize> {
-        self.span.clone()
+        match self {
+            _ => unreachable!(),
+        }
     }
 }
-impl YggdrasilNode for StringEscapedNode {
+
+impl YggdrasilNode for StringRawNode {
     type Language = Json5Language;
 
     fn get_language(&self) -> Self::Language {
@@ -63,7 +70,21 @@ impl YggdrasilNode for StringEscapedNode {
     }
 
     fn get_range(&self) -> Range<usize> {
-        self.span.clone()
+        Range { start: self.span.start as usize, end: self.span.end as usize }
+    }
+}
+
+impl YggdrasilNode for StringTextNode {
+    type Language = Json5Language;
+
+    fn get_language(&self) -> Self::Language {
+        Json5Language {}
+    }
+
+    fn get_range(&self) -> Range<usize> {
+        match self {
+            _ => unreachable!(),
+        }
     }
 }
 impl YggdrasilNode for NumberNode {
@@ -74,7 +95,7 @@ impl YggdrasilNode for NumberNode {
     }
 
     fn get_range(&self) -> Range<usize> {
-        self.span.clone()
+        Range { start: self.span.start as usize, end: self.span.end as usize }
     }
 }
 impl YggdrasilNode for BooleanNode {
@@ -85,7 +106,9 @@ impl YggdrasilNode for BooleanNode {
     }
 
     fn get_range(&self) -> Range<usize> {
-        self.span.clone()
+        match self {
+            _ => unreachable!(),
+        }
     }
 }
 impl YggdrasilNode for NullNode {
@@ -96,7 +119,7 @@ impl YggdrasilNode for NullNode {
     }
 
     fn get_range(&self) -> Range<usize> {
-        self.span.clone()
+        Range { start: self.span.start as usize, end: self.span.end as usize }
     }
 }
 impl YggdrasilNode for IdentifierNode {
@@ -107,7 +130,7 @@ impl YggdrasilNode for IdentifierNode {
     }
 
     fn get_range(&self) -> Range<usize> {
-        self.span.clone()
+        Range { start: self.span.start as usize, end: self.span.end as usize }
     }
 }
 impl YggdrasilNode for WhiteSpaceNode {
@@ -118,6 +141,6 @@ impl YggdrasilNode for WhiteSpaceNode {
     }
 
     fn get_range(&self) -> Range<usize> {
-        self.span.clone()
+        Range { start: self.span.start as usize, end: self.span.end as usize }
     }
 }

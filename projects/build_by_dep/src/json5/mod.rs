@@ -17,9 +17,9 @@ type Output<'i> = Result<Box<State<'i, Json5Rule>>, Box<State<'i, Json5Rule>>>;
 #[repr(C)]
 #[derive(Copy, Clone, Debug, Default, PartialEq, Eq, Ord, PartialOrd, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct Json5Language {}
+pub struct Json5Parser {}
 
-impl YggdrasilLanguage for Json5Language {
+impl YggdrasilParser for Json5Parser {
     type Rule = Json5Rule;
     fn parse_cst(input: &str, rule: Self::Rule) -> OutputResult<Json5Rule> {
         self::parse_cst::parse_cst(input, rule)
@@ -99,7 +99,6 @@ pub enum StringNode {}
 pub struct StringRawNode {
     pub span: Range<u32>,
 }
-
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum StringTextNode {}

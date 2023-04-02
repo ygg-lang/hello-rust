@@ -11,7 +11,7 @@ fn test_array() {
     let cst = Json5Parser::parse_cst("[1, null, ]", Json5Rule::Value).unwrap();
     println!("{:#}", cst);
     println!("Short Form:\n{}", cst);
-    let lex = cst.flatten().tokens();
-    println!("{:#?}", lex);
-    // println!("Short Form:\n{}", lex);
+    for pair in cst.flatten() {
+        println!("{:#}", pair);
+    }
 }

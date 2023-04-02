@@ -33,15 +33,18 @@ pub enum Json5Rule {
     Value,
     Object,
     ObjectPair,
+    ObjectKey,
     Array,
     String,
     StringRaw,
     StringText,
+    StringEscape,
     Number,
+    Identifier,
     Boolean,
     Null,
-    Identifier,
     WhiteSpace,
+    Comment,
     /// Label for text literal
     IgnoreText,
     /// Label for regex literal
@@ -58,15 +61,18 @@ impl YggdrasilRule for Json5Rule {
             Self::Value => "",
             Self::Object => "",
             Self::ObjectPair => "",
+            Self::ObjectKey => "",
             Self::Array => "",
             Self::String => "",
             Self::StringRaw => "",
             Self::StringText => "",
+            Self::StringEscape => "",
             Self::Number => "",
+            Self::Identifier => "",
             Self::Boolean => "",
             Self::Null => "",
-            Self::Identifier => "",
             Self::WhiteSpace => "",
+            Self::Comment => "",
             _ => "",
         }
     }
@@ -83,7 +89,15 @@ pub struct ObjectNode {
 }
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum ObjectPairNode {}
+pub struct ObjectPairNode {
+    pub object_key: ObjectKeyNode,
+    pub value: ValueNode,
+    pub span: Range<u32>,
+}
+
+#[derive(Clone, Debug, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum ObjectKeyNode {}
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct ArrayNode {
@@ -102,11 +116,23 @@ pub struct StringRawNode {
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum StringTextNode {}
+
+#[derive(Clone, Debug, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct StringEscapeNode {
+    pub span: Range<u32>,
+}
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct NumberNode {
     pub span: Range<u32>,
 }
+#[derive(Clone, Debug, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct IdentifierNode {
+    pub span: Range<u32>,
+}
+
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum BooleanNode {}
@@ -117,11 +143,9 @@ pub struct NullNode {
 }
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct IdentifierNode {
+pub struct WhiteSpaceNode {
     pub span: Range<u32>,
 }
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub struct WhiteSpaceNode {
-    pub span: Range<u32>,
-}
+pub enum CommentNode {}

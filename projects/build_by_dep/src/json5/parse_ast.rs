@@ -20,6 +20,14 @@ impl YggdrasilNode for ObjectPairNode {
     type Rule = Json5Rule;
 
     fn get_range(&self) -> Option<Range<usize>> {
+        Some(Range { start: self.span.start as usize, end: self.span.end as usize })
+    }
+}
+
+impl YggdrasilNode for ObjectKeyNode {
+    type Rule = Json5Rule;
+
+    fn get_range(&self) -> Option<Range<usize>> {
         match self {
             _ => unreachable!(),
         }
@@ -57,7 +65,23 @@ impl YggdrasilNode for StringTextNode {
         }
     }
 }
+
+impl YggdrasilNode for StringEscapeNode {
+    type Rule = Json5Rule;
+
+    fn get_range(&self) -> Option<Range<usize>> {
+        Some(Range { start: self.span.start as usize, end: self.span.end as usize })
+    }
+}
 impl YggdrasilNode for NumberNode {
+    type Rule = Json5Rule;
+
+    fn get_range(&self) -> Option<Range<usize>> {
+        Some(Range { start: self.span.start as usize, end: self.span.end as usize })
+    }
+}
+
+impl YggdrasilNode for IdentifierNode {
     type Rule = Json5Rule;
 
     fn get_range(&self) -> Option<Range<usize>> {
@@ -80,17 +104,21 @@ impl YggdrasilNode for NullNode {
         Some(Range { start: self.span.start as usize, end: self.span.end as usize })
     }
 }
-impl YggdrasilNode for IdentifierNode {
+
+impl YggdrasilNode for WhiteSpaceNode {
     type Rule = Json5Rule;
 
     fn get_range(&self) -> Option<Range<usize>> {
         Some(Range { start: self.span.start as usize, end: self.span.end as usize })
     }
 }
-impl YggdrasilNode for WhiteSpaceNode {
+
+impl YggdrasilNode for CommentNode {
     type Rule = Json5Rule;
 
     fn get_range(&self) -> Option<Range<usize>> {
-        Some(Range { start: self.span.start as usize, end: self.span.end as usize })
+        match self {
+            _ => unreachable!(),
+        }
     }
 }

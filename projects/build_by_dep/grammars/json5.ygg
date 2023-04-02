@@ -1,4 +1,6 @@
-grammar Json5 {}
+grammar Json5 {
+    file: '*.json5'
+}
 
 entry union Value {
     | Object  #Object
@@ -8,51 +10,68 @@ entry union Value {
     | Boolean #Boolean
     | Null    #Null
 }
-
+// === object === ------------------------------------------------------------------------------------------------------
 class Object {
     '{' (ObjectPair (',' ObjectPair)* ',')? '}'
 }
 
-union ObjectPair {
-    | Identifier ':' Value  #IdentifierKey
-    | String ':' Value      #StringKey
+class ObjectPair {
+    ObjectKey ':' Value
 }
 
+@style(field)
+union ObjectKey {
+    | Identifier
+    | String
+}
+// === array === ------------------------------------------------------------------------------------------------------
 class Array {
     '[' (item:Value (',' Value)* ',')? ']'
 }
-
+// === string === ------------------------------------------------------------------------------------------------------
+@style(string)
 atomic union String {
     | "'" StringRaw "'"    #SingleQuote
     | "'" StringText* "'"  #DoubleQuote
 }
-
 class StringRaw -> StringText {
 /[^"]*/
 }
-
 union StringText {
-| '\' ANY #Escape
+| StringEscape #Escape
     | /[^"]+/ #Character
 }
-
+@style(escape)
+class StringEscape {
+'\' c:ANY
+}
+// === number === ------------------------------------------------------------------------------------------------------
+@style(number)
 atomic class Number {
     /[+-]?(0|[1-9][0-9]*)/
 }
-
+// === identifier === --------------------------------------------------------------------------------------------------
+class Identifier {
+    /[_\p{XID_start}][\p{XID_continue}]*/
+}
+// === special === -----------------------------------------------------------------------------------------------------
+@style(keyword)
 union Boolean {
     | "true"  #True
     | "false" #False
 }
-
+@style(keyword)
 class Null {
     "null"
 }
-
-class Identifier {
-    /[_\p{XID_start}][\p{XID_continue}]*/
+// === ignores === -----------------------------------------------------------------------------------------------------
+ignore class WhiteSpace {
+    [\p{WhiteSpace}]
 }
 
-atomic ignore class WhiteSpace {
-    [\p{WhiteSpace}]
+@style(comment)
+ignore union Comment {
+    | @comment_line('//')
+| @comment_line('#')
+| @comment_block('/*', '*/', nest: false)
 }

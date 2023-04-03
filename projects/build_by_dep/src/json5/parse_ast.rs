@@ -23,7 +23,6 @@ impl YggdrasilNode for ObjectPairNode {
         Some(Range { start: self.span.start as usize, end: self.span.end as usize })
     }
 }
-
 impl YggdrasilNode for ObjectKeyNode {
     type Rule = Json5Rule;
 
@@ -65,7 +64,6 @@ impl YggdrasilNode for StringTextNode {
         }
     }
 }
-
 impl YggdrasilNode for StringEscapeNode {
     type Rule = Json5Rule;
 
@@ -80,7 +78,6 @@ impl YggdrasilNode for NumberNode {
         Some(Range { start: self.span.start as usize, end: self.span.end as usize })
     }
 }
-
 impl YggdrasilNode for IdentifierNode {
     type Rule = Json5Rule;
 
@@ -104,7 +101,6 @@ impl YggdrasilNode for NullNode {
         Some(Range { start: self.span.start as usize, end: self.span.end as usize })
     }
 }
-
 impl YggdrasilNode for WhiteSpaceNode {
     type Rule = Json5Rule;
 
@@ -112,7 +108,6 @@ impl YggdrasilNode for WhiteSpaceNode {
         Some(Range { start: self.span.start as usize, end: self.span.end as usize })
     }
 }
-
 impl YggdrasilNode for CommentNode {
     type Rule = Json5Rule;
 

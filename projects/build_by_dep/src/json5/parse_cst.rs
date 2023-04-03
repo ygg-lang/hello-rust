@@ -25,12 +25,17 @@ pub(super) fn parse_cst(input: &str, rule: Json5Rule) -> OutputResult<Json5Rule>
 fn parse_value(state: Input) -> Output {
     state.rule(Json5Rule::Value, |s| {
         parse_object(s)
-            .and_then(|s| s.tag_node("Object"))
-            .or_else(|s| parse_array(s).and_then(|s| s.tag_node("Array")))
-            .or_else(|s| parse_string(s).and_then(|s| s.tag_node("String")))
-            .or_else(|s| parse_number(s).and_then(|s| s.tag_node("Number")))
-            .or_else(|s| parse_boolean(s).and_then(|s| s.tag_node("Boolean")))
-            .or_else(|s| parse_null(s).and_then(|s| s.tag_node("Null")))
+            .and_then(|s| s.tag_node("object"))
+            .or_else(|s| parse_array(s).and_then(|s| s.tag_node("array")))
+            .and_then(|s| s.tag_node("0"))
+            .or_else(|s| parse_string(s).and_then(|s| s.tag_node("string")))
+            .and_then(|s| s.tag_node("0"))
+            .or_else(|s| parse_number(s).and_then(|s| s.tag_node("number")))
+            .and_then(|s| s.tag_node("0"))
+            .or_else(|s| parse_boolean(s).and_then(|s| s.tag_node("boolean")))
+            .and_then(|s| s.tag_node("0"))
+            .or_else(|s| parse_null(s).and_then(|s| s.tag_node("null")))
+            .and_then(|s| s.tag_node("0"))
     })
 }
 #[inline]
@@ -43,13 +48,13 @@ fn parse_object(state: Input) -> Output {
                     s.optional(|s| {
                         s.sequence(|s| {
                             parse_object_pair(s)
-                                .and_then(|s| s.tag_node("ObjectPair"))
+                                .and_then(|s| s.tag_node("object_pair"))
                                 .and_then(|s| builtin_ignore(s))
                                 .and_then(|s| {
                                     s.repeat(0..4294967295, |s| {
                                         s.sequence(|s| {
                                             s.sequence(|s| builtin_text(s, ",", false).and_then(|s| builtin_ignore(s)))
-                                                .and_then(|s| parse_object_pair(s).and_then(|s| s.tag_node("ObjectPair")))
+                                                .and_then(|s| parse_object_pair(s).and_then(|s| s.tag_node("object_pair")))
                                         })
                                     })
                                 })
@@ -69,22 +74,22 @@ fn parse_object_pair(state: Input) -> Output {
         s.sequence(|s| {
             s.sequence(|s| {
                 parse_object_key(s)
-                    .and_then(|s| s.tag_node("ObjectKey"))
+                    .and_then(|s| s.tag_node("object_key"))
                     .and_then(|s| builtin_ignore(s))
                     .and_then(|s| builtin_text(s, ":", false))
                     .and_then(|s| builtin_ignore(s))
             })
-            .and_then(|s| parse_value(s).and_then(|s| s.tag_node("Value")))
+            .and_then(|s| parse_value(s).and_then(|s| s.tag_node("value")))
         })
     })
 }
-
 #[inline]
 fn parse_object_key(state: Input) -> Output {
     state.rule(Json5Rule::ObjectKey, |s| {
         parse_identifier(s)
-            .and_then(|s| s.tag_node("Identifier"))
-            .or_else(|s| parse_string(s).and_then(|s| s.tag_node("String")))
+            .and_then(|s| s.tag_node("identifier"))
+            .or_else(|s| parse_string(s).and_then(|s| s.tag_node("string")))
+            .and_then(|s| s.tag_node("0"))
     })
 }
 #[inline]
@@ -103,7 +108,7 @@ fn parse_array(state: Input) -> Output {
                                     s.repeat(0..4294967295, |s| {
                                         s.sequence(|s| {
                                             s.sequence(|s| builtin_text(s, ",", false).and_then(|s| builtin_ignore(s)))
-                                                .and_then(|s| parse_value(s).and_then(|s| s.tag_node("Value")))
+                                                .and_then(|s| parse_value(s).and_then(|s| s.tag_node("value")))
                                         })
                                     })
                                 })
@@ -122,16 +127,17 @@ fn parse_string(state: Input) -> Output {
     state.rule(Json5Rule::String, |s| {
         s.sequence(|s| {
             builtin_text(s, "'", false)
-                .and_then(|s| parse_string_raw(s).and_then(|s| s.tag_node("StringRaw")))
+                .and_then(|s| parse_string_raw(s).and_then(|s| s.tag_node("string_raw")))
                 .and_then(|s| builtin_text(s, "'", false))
         })
         .or_else(|s| {
             s.sequence(|s| {
                 builtin_text(s, "'", false)
-                    .and_then(|s| s.repeat(0..4294967295, |s| parse_string_text(s).and_then(|s| s.tag_node("StringText"))))
+                    .and_then(|s| s.repeat(0..4294967295, |s| parse_string_text(s).and_then(|s| s.tag_node("string_text"))))
                     .and_then(|s| builtin_text(s, "'", false))
             })
         })
+        .and_then(|s| s.tag_node("0"))
     })
 }
 #[inline]
@@ -146,15 +152,17 @@ fn parse_string_raw(state: Input) -> Output {
 #[inline]
 fn parse_string_text(state: Input) -> Output {
     state.rule(Json5Rule::StringText, |s| {
-        parse_string_escape(s).and_then(|s| s.tag_node("StringEscape")).or_else(|s| {
-            builtin_regex(s, {
-                static REGEX: OnceLock<Regex> = OnceLock::new();
-                REGEX.get_or_init(|| Regex::new("^([^\"]+)").unwrap())
+        parse_string_escape(s)
+            .and_then(|s| s.tag_node("string_escape"))
+            .or_else(|s| {
+                builtin_regex(s, {
+                    static REGEX: OnceLock<Regex> = OnceLock::new();
+                    REGEX.get_or_init(|| Regex::new("^([^\"]+)").unwrap())
+                })
             })
-        })
+            .and_then(|s| s.tag_node("0"))
     })
 }
-
 #[inline]
 fn parse_string_escape(state: Input) -> Output {
     state.rule(Json5Rule::StringEscape, |s| {
@@ -182,12 +190,12 @@ fn parse_identifier(state: Input) -> Output {
         })
     })
 }
-
 #[inline]
 fn parse_boolean(state: Input) -> Output {
-    state.rule(Json5Rule::Boolean, |s| builtin_text(s, "true", false).or_else(|s| builtin_text(s, "false", false)))
+    state.rule(Json5Rule::Boolean, |s| {
+        builtin_text(s, "true", false).or_else(|s| builtin_text(s, "false", false)).and_then(|s| s.tag_node("0"))
+    })
 }
-
 #[inline]
 fn parse_null(state: Input) -> Output {
     state.rule(Json5Rule::Null, |s| s.match_string("null", false))
@@ -201,11 +209,14 @@ fn parse_white_space(state: Input) -> Output {
         })
     })
 }
-
 #[inline]
 fn parse_comment(state: Input) -> Output {
     state.rule(Json5Rule::Comment, |s| {
-        Err(/* comment_line */ s).or_else(|s| Err(/* comment_line */ s)).or_else(|s| Err(/* comment_block */ s))
+        Err(/* comment_line */ s)
+            .or_else(|s| Err(/* comment_line */ s))
+            .and_then(|s| s.tag_node("0"))
+            .or_else(|s| Err(/* comment_block */ s))
+            .and_then(|s| s.tag_node("1"))
     })
 }
 

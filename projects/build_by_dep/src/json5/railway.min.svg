@@ -7,65 +7,53 @@
 <text class="comment" id="Value" x="57" y="26">
 Value</text>
 <g class="choice">
-    <path d=" M 90 21 h 24 m 260 0 h 24"/>
-    <g class="choice">
-        <path d=" M 114 21 h 24 m 212 0 h 24"/>
-        <g class="choice">
-            <path d=" M 138 21 h 24 m 164 0 h 24"/>
-            <g class="choice">
-                <path d=" M 162 21 h 24 m 116 0 h 24"/>
-                <g class="choice">
-                    <path d=" M 186 21 h 24 m 68 0 h 24"/>
+    <path d=" M 90 21 h 24 m 68 0 h 32"/>
 <a class="link" xlink:href="#Object">
 <g class="symbol">
-    <rect height="22" width="68" x="210" y="10"/>
-    <text x="244" y="26">
+    <rect height="22" width="68" x="114" y="10"/>
+    <text x="148" y="26">
 Object</text>
 </g>
 </a>
-                    <path d=" M 186 21 a 12 12 0 0 1 12 12 v 9 m 92 0 v -9 a 12 12 0 0 1 12 -12"/>
-                    <path d=" M 198 42 v 0 a 12 12 0 0 0 12 12 m 60 0 h 8 a 12 12 0 0 0 12 -12 v 0"/>
+    <path d=" M 90 21 a 12 12 0 0 1 12 12 v 9 m 100 0 v -9 a 12 12 0 0 1 12 -12"/>
+    <path d=" M 102 42 v 33 m 100 0 v -33"/>
+    <path d=" M 102 75 v 33 m 100 0 v -33"/>
+    <path d=" M 102 108 v 33 m 100 0 v -33"/>
+    <path d=" M 102 141 v 33 m 100 0 v -33"/>
+    <path d=" M 102 42 v 0 a 12 12 0 0 0 12 12 m 60 0 h 16 a 12 12 0 0 0 12 -12 v 0"/>
 <a class="link" xlink:href="#Array">
 <g class="symbol">
-    <rect height="22" width="60" x="210" y="43"/>
-    <text x="240" y="59">
+    <rect height="22" width="60" x="114" y="43"/>
+    <text x="144" y="59">
 Array</text>
 </g>
 </a>
-                </g>
-                <path d=" M 162 21 a 12 12 0 0 1 12 12 v 42 m 140 0 v -42 a 12 12 0 0 1 12 -12"/>
-                <path d=" M 174 75 v 0 a 12 12 0 0 0 12 12 m 68 0 h 48 a 12 12 0 0 0 12 -12 v 0"/>
-                <a class="link" xlink:href="#String">
-                    <g class="symbol">
-                        <rect height="22" width="68" x="186" y="76"/>
-                        <text x="220" y="92">
-                            String
-                        </text>
-                    </g>
-                </a>
-            </g>
-            <path d=" M 138 21 a 12 12 0 0 1 12 12 v 75 m 0 -34 l -5 -5 m 10 0 l -5 5 m 0 34 m 188 0 v -75 m 0 40 l -5 5 m 10 0 l -5 -5 m 0 -40 a 12 12 0 0 1 12 -12"/>
-            <path d=" M 150 108 v 0 a 12 12 0 0 0 12 12 m 68 0 h 96 m -45 0 l -5 -5 m 0 10 l 5 -5 m 45 0 a 12 12 0 0 0 12 -12 v 0"/>
+    <path d=" M 102 75 v 0 a 12 12 0 0 0 12 12 m 68 0 h 8 a 12 12 0 0 0 12 -12 v 0"/>
+    <a class="link" xlink:href="#String">
+        <g class="symbol">
+            <rect height="22" width="68" x="114" y="76"/>
+            <text x="148" y="92">
+                String
+            </text>
+        </g>
+    </a>
+    <path d=" M 102 108 v 0 a 12 12 0 0 0 12 12 m 68 0 h 8 a 12 12 0 0 0 12 -12 v 0"/>
 <a class="link" xlink:href="#Number">
 <g class="symbol">
-    <rect height="22" width="68" x="162" y="109"/>
-    <text x="196" y="125">
+    <rect height="22" width="68" x="114" y="109"/>
+    <text x="148" y="125">
 Number</text>
 </g>
 </a>
-        </g>
-        <path d=" M 114 21 a 12 12 0 0 1 12 12 v 108 m 0 -51 l -5 -5 m 10 0 l -5 5 m 0 51 m 236 0 v -108 m 0 57 l -5 5 m 10 0 l -5 -5 m 0 -57 a 12 12 0 0 1 12 -12"/>
-        <path d=" M 126 141 v 0 a 12 12 0 0 0 12 12 m 76 0 h 136 m -65 0 l -5 -5 m 0 10 l 5 -5 m 65 0 a 12 12 0 0 0 12 -12 v 0"/>
+    <path d=" M 102 141 v 0 a 12 12 0 0 0 12 12 m 76 0 h 0 a 12 12 0 0 0 12 -12 v 0"/>
 <a class="link" xlink:href="#Boolean">
 <g class="symbol">
-    <rect height="22" width="76" x="138" y="142"/>
-    <text x="176" y="158">
+    <rect height="22" width="76" x="114" y="142"/>
+    <text x="152" y="158">
 Boolean</text>
 </g>
 </a>
-    </g>
-    <path d=" M 90 21 a 12 12 0 0 1 12 12 v 141 m 0 -67 l -5 -5 m 10 0 l -5 5 m 0 67 m 284 0 v -141 m 0 73 l -5 5 m 10 0 l -5 -5 m 0 -73 a 12 12 0 0 1 12 -12"/>
-    <path d=" M 102 174 v 0 a 12 12 0 0 0 12 12 m 52 0 h 208 m -101 0 l -5 -5 m 0 10 l 5 -5 m 101 0 a 12 12 0 0 0 12 -12 v 0"/>
+    <path d=" M 102 174 v 0 a 12 12 0 0 0 12 12 m 52 0 h 24 a 12 12 0 0 0 12 -12 v 0"/>
 <a class="link" xlink:href="#Null">
 <g class="symbol">
     <rect height="22" width="52" x="114" y="175"/>
@@ -74,10 +62,10 @@ Null</text>
 </g>
 </a>
 </g>
-    <path d=" M 408 21 h 5 a 5 5 0 0 1 5 -5 a 5 5 0 0 1 5 5 a 5 5 0 0 1 -5 5 a 5 5 0 0 1 -5 -5"/>
+    <path d=" M 224 21 h 5 a 5 5 0 0 1 5 -5 a 5 5 0 0 1 5 5 a 5 5 0 0 1 -5 5 a 5 5 0 0 1 -5 -5"/>
 <path d=" M 25 21 h 10"/>
 <path d=" M 80 21 h 10"/>
-    <path d=" M 398 21 h 10"/>
+    <path d=" M 214 21 h 10"/>
 </g>
 <g class="sequence">
     <path d=" M 10 233 a 5 5 0 0 1 5 -5 a 5 5 0 0 1 5 5 a 5 5 0 0 1 -5 5 a 5 5 0 0 1 -5 -5 m 10 0 h 5"/>

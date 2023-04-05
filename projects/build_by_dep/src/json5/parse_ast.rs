@@ -1,11 +1,13 @@
 use super::*;
 
+
+
 impl YggdrasilNode for ValueNode {
     type Rule = Json5Rule;
 
     fn get_range(&self) -> Option<Range<usize>> {
         match self {
-            _ => unreachable!(),
+            _ => unreachable!()
         }
     }
 }
@@ -28,7 +30,7 @@ impl YggdrasilNode for ObjectKeyNode {
 
     fn get_range(&self) -> Option<Range<usize>> {
         match self {
-            _ => unreachable!(),
+            _ => unreachable!()
         }
     }
 }
@@ -44,7 +46,7 @@ impl YggdrasilNode for StringNode {
 
     fn get_range(&self) -> Option<Range<usize>> {
         match self {
-            _ => unreachable!(),
+            _ => unreachable!()
         }
     }
 }
@@ -60,7 +62,7 @@ impl YggdrasilNode for StringTextNode {
 
     fn get_range(&self) -> Option<Range<usize>> {
         match self {
-            _ => unreachable!(),
+            _ => unreachable!()
         }
     }
 }
@@ -90,7 +92,7 @@ impl YggdrasilNode for BooleanNode {
 
     fn get_range(&self) -> Option<Range<usize>> {
         match self {
-            _ => unreachable!(),
+            _ => unreachable!()
         }
     }
 }
@@ -113,7 +115,8 @@ impl YggdrasilNode for CommentNode {
 
     fn get_range(&self) -> Option<Range<usize>> {
         match self {
-            _ => unreachable!(),
+            _ => unreachable!()
         }
     }
 }
+

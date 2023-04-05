@@ -80,7 +80,14 @@ impl YggdrasilRule for Json5Rule {
 
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum ValueNode {}
+pub enum ValueNode {
+    Array(ArrayNode),
+    Boolean(BooleanNode),
+    Null(NullNode),
+    Number(NumberNode),
+    Object(ObjectNode),
+    String(StringNode),
+}
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct ObjectNode {
@@ -96,17 +103,22 @@ pub struct ObjectPairNode {
 }
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum ObjectKeyNode {}
+pub enum ObjectKeyNode {
+    Identifier(IdentifierNode),
+    String(StringNode),
+}
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct ArrayNode {
-    pub value: ValueNode,
-    pub item: ValueNode,
+    pub value: Vec<ValueNode>,
     pub span: Range<u32>,
 }
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum StringNode {}
+pub enum StringNode {
+    String0(StringRawNode),
+    String1(Vec<StringTextNode>),
+}
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct StringRawNode {
@@ -114,7 +126,10 @@ pub struct StringRawNode {
 }
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum StringTextNode {}
+pub enum StringTextNode {
+    StringEscape(StringEscapeNode),
+    StringText1,
+}
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct StringEscapeNode {
@@ -132,7 +147,10 @@ pub struct IdentifierNode {
 }
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum BooleanNode {}
+pub enum BooleanNode {
+    Boolean0,
+    Boolean1,
+}
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct NullNode {
@@ -145,4 +163,8 @@ pub struct WhiteSpaceNode {
 }
 #[derive(Clone, Debug, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum CommentNode {}
+pub enum CommentNode {
+    Comment0,
+    Comment1,
+    Comment2,
+}

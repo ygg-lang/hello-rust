@@ -15,16 +15,16 @@ exclude = ["package.json", "tests/**"]
 [dependencies]
 
 [dependencies.yggdrasil-rt]
-version = "0.0.6"
-path = 'C:\Users\Dell\CLionProjects\yggdrasil-rs\projects\ygg-rt'
+version = "0.0.8"
+#path = 'C:\Users\Dell\CLionProjects\yggdrasil-rs\projects\ygg-rt'
 
 [dev-dependencies]
 
 [build-dependencies.yggdrasil-shared]
 version = "0.2.3"
-path = 'C:\Users\Dell\CLionProjects\yggdrasil-rs\projects\ygg-core'
-#git = "https://github.com/ygg-lang/yggdrasil-rs"
-#branch = "dev"
+#path = 'C:\Users\Dell\CLionProjects\yggdrasil-rs\projects\ygg-core'
+git = "https://github.com/ygg-lang/yggdrasil-rs"
+branch = "dev"
 
 [features]
 default = []

@@ -1,0 +1,9 @@
+{
+    export: "src/",
+    language: "rs",
+    includes: [
+        "grammars/*.ygg"
+    ],
+    excludes: [
+    ],
+}

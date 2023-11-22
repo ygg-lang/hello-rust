@@ -13,7 +13,7 @@ edition = "2021"
 exclude = ["package.json", "tests/**"]
 
 [dependencies]
-yggdrasil-rt = "0.0.14"
+yggdrasil-rt = "0.0.15"
 
 [dev-dependencies]
 

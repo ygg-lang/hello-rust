@@ -15,7 +15,7 @@ exclude = ["package.json", "tests/**"]
 [dependencies]
 
 [dependencies.yggdrasil-rt]
-version = "0.0.14"
+version = "0.0.16"
 #path = 'C:\Users\Dell\CLionProjects\yggdrasil-rs\projects\ygg-rt'
 
 [dev-dependencies]
